@@ -158,15 +158,9 @@ function Onupdate(eve) {
 // DELETE
 
 function OnDelete(eve) {
-    let Remove_Id =eve.closest("li").id;
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to recover this record!",
-        icon: "warning",
-        howCancelButton: true,
-        confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
-        if (result.isConfirmed) {
+    let Remove_Id=eve.closest("li").id;
+    let confirmation=confirm("Are you sure to Delete??")
+    if (confirmation){
             let xhr = new XMLHttpRequest();
             xhr.open("DELETE",`${BASE_URL}/subject/${Remove_Id}.json`);
             Ontoggle();
@@ -175,8 +169,8 @@ function OnDelete(eve) {
                 if (xhr.status >= 200 && xhr.status <= 299) {
                     eve.closest("li").remove();
                     Swal.fire({
-                        title: "Deleted!",
-                        text: `Record deleted with id ${Remove_Id}`,
+                        title:`Deleted id ${Remove_Id}!`,
+                        text: "Your file has been deleted.",
                         icon: "success"
                     });
                 } else {
@@ -185,8 +179,8 @@ function OnDelete(eve) {
                 Ontoggle();
             };
         }
-    });
-}
+    };
+
 
 // EVENT LISTENERS
 
